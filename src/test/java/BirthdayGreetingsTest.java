@@ -5,7 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,11 +40,24 @@ public class BirthdayGreetingsTest {
     }
 
     @Test
-    void sendMail() throws MessagingException {
+    void sendMail() throws MessagingException, UnsupportedEncodingException {
         GreenMail greenMail = new GreenMail();
         greenMail.start();
 
-        GreenMailUtil.sendTextEmailTest("john.doe@foobar.com", "no-reply@foobar.com", "Happy birthday!", "Happy birthday, dear John!");
+        //Get the session object
+        Properties properties = System.getProperties();
+        properties.setProperty("mail.smtp.host", "127.0.0.1");
+        properties.setProperty("mail.smtp.port", "3025");
+        Session session = Session.getDefaultInstance(properties);
+
+        MimeMessage msg = new MimeMessage(session);
+        //set message headers
+        msg.setFrom(new InternetAddress("no-reply@foobar.com"));
+        msg.setSubject("Happy birthday!");
+        msg.setText("Happy birthday, dear John!");
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("john.doe@foobar.com", false));
+
+        Transport.send(msg);
 
         MimeMessage receivedMessage = greenMail.getReceivedMessages()[0];
         assertEquals("Happy birthday, dear John!", GreenMailUtil.getBody(receivedMessage));
