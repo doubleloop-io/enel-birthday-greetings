@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -23,10 +24,12 @@ public class BirthdayGreetings {
                 .toArray(String[]::new);
         String employeeName = johnParts[1];
         String employeeEmail = johnParts[3];
-        LocalDate employeeBirthDate = LocalDate.of(1982, 10, 8);
+        LocalDate employeeBirthDate = LocalDate.parse(
+                johnParts[2],
+                DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
         if(employeeBirthDate.getMonth() == today.getMonth() &&
-            employeeBirthDate.getDayOfMonth() == today.getDayOfMonth()) {
+                employeeBirthDate.getDayOfMonth() == today.getDayOfMonth()) {
             Properties properties = System.getProperties();
             properties.setProperty("mail.smtp.host", "127.0.0.1");
             properties.setProperty("mail.smtp.port", "3025");
