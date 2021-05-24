@@ -23,6 +23,8 @@ public class BirthdayGreetings {
         String[] johnParts = Arrays.stream(johnDoe.split(","))
                 .map(String::trim)
                 .toArray(String[]::new);
+        String employeeName = johnParts[1];
+        String employeeEmail = johnParts[3];
 
         //Get the session object
         Properties properties = System.getProperties();
@@ -34,9 +36,9 @@ public class BirthdayGreetings {
         //set message headers
         msg.setFrom(new InternetAddress("no-reply@foobar.com"));
         msg.setSubject("Happy birthday!");
-        msg.setText("Happy birthday, dear " + johnParts[1] + "!");
+        msg.setText("Happy birthday, dear " + employeeName + "!");
 //        msg.setText("Happy birthday, dear John!");
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(johnParts[3], false));
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(employeeEmail, false));
 
         Transport.send(msg);
     }
