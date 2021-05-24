@@ -60,6 +60,7 @@ http://matteo.vaccari.name/blog/archives/154
 
   Then:
   no email
+- [ ] handle external resources
 - [ ] Employee file is empty -> log error to console (message empty file) + no email 
 - [ ] Wrong file format
   - [ ] estensione
