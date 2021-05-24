@@ -61,6 +61,22 @@ public class BirthdayGreetingsTest {
     }
 
     @Test
+    void noGreetings() throws IOException, MessagingException {
+        Files.write(Path.of("employee.csv"),
+                Arrays.asList(
+                        "last_name, first_name, date_of_birth, email",
+                        "Doe, John, 1982/10/08, john.doe@foobar.com",
+                        "Ann, Mary, 1975/09/11, mary.ann@foobar.com",
+                        "Vallotti, Andrea, 1977/09/11, andrea.vallotti@foobar.com"
+                ),
+                StandardCharsets.US_ASCII);
+
+        new BirthdayGreetings().send(LocalDate.of(2021, 9, 12));
+
+        assertThat(localSmtpServer.receivedMessages()).isEmpty();
+    }
+
+    @Test
     void sendMail() throws MessagingException {
         //Get the session object
         Properties properties = System.getProperties();

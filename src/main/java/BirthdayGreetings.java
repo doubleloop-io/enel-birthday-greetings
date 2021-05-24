@@ -23,18 +23,22 @@ public class BirthdayGreetings {
                 .toArray(String[]::new);
         String employeeName = johnParts[1];
         String employeeEmail = johnParts[3];
+        LocalDate employeeBirthDate = LocalDate.of(1982, 10, 8);
 
-        Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", "127.0.0.1");
-        properties.setProperty("mail.smtp.port", "3025");
-        Session session = Session.getDefaultInstance(properties);
+        if(employeeBirthDate.getMonth() == today.getMonth() &&
+            employeeBirthDate.getDayOfMonth() == today.getDayOfMonth()) {
+            Properties properties = System.getProperties();
+            properties.setProperty("mail.smtp.host", "127.0.0.1");
+            properties.setProperty("mail.smtp.port", "3025");
+            Session session = Session.getDefaultInstance(properties);
 
-        MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("no-reply@foobar.com"));
-        msg.setSubject("Happy birthday!");
-        msg.setText("Happy birthday, dear " + employeeName + "!");
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(employeeEmail, false));
+            MimeMessage msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress("no-reply@foobar.com"));
+            msg.setSubject("Happy birthday!");
+            msg.setText("Happy birthday, dear " + employeeName + "!");
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(employeeEmail, false));
 
-        Transport.send(msg);
+            Transport.send(msg);
+        }
     }
 }
