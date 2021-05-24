@@ -1,7 +1,9 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class BirthdayGreetingsTest {
     @Test
+    @Disabled
     void oneGreeting() {
         //Arrange
         /* Write a file with employees
