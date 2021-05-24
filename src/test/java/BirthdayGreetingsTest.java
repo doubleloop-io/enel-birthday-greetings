@@ -1,6 +1,5 @@
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;
-import kotlin.NotImplementedError;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +9,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Objects;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,7 +39,7 @@ public class BirthdayGreetingsTest {
     }
 
     @Test
-    void sendMail() throws MessagingException, UnsupportedEncodingException {
+    void sendMail() throws MessagingException {
         LocalSmtpServer localSmtpServer = new LocalSmtpServer();
         localSmtpServer.start();
 
@@ -62,10 +59,12 @@ public class BirthdayGreetingsTest {
         Transport.send(msg);
 
         MailInfo receivedMessage = localSmtpServer.receivedMessages()[0];
-        assertEquals("no-reply@foobar.com", receivedMessage.getFrom());
-        assertEquals("john.doe@foobar.com", receivedMessage.getTo());
-        assertEquals("Happy birthday!", receivedMessage.getSubject());
-        assertEquals("Happy birthday, dear John!", receivedMessage.getBody());
+        MailInfo expected = new MailInfo(
+                "no-reply@foobar.com",
+                "john.doe@foobar.com",
+                "Happy birthday!",
+                "Happy birthday, dear John!");
+        assertEquals(expected, receivedMessage);
 
         localSmtpServer.stop();
     }
@@ -122,6 +121,19 @@ public class BirthdayGreetingsTest {
 
         public String getBody() {
             return body;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            MailInfo mailInfo = (MailInfo) o;
+            return from.equals(mailInfo.from) && to.equals(mailInfo.to) && subject.equals(mailInfo.subject) && body.equals(mailInfo.body);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(from, to, subject, body);
         }
     }
 }
