@@ -19,7 +19,7 @@ http://matteo.vaccari.name/blog/archives/154
 - Time
 
 ## Test list
-- [ ] one greeting
+- [X] one greeting
   Given:
   ```
   last_name, first_name, date_of_birth, email
@@ -60,7 +60,9 @@ http://matteo.vaccari.name/blog/archives/154
 
   Then:
   no email
-- [ ] handle external resources
+- [ ] pass filepath to BirthdayGreetings
+- [ ] pass SMTP server configuration to BirthdayGreetings 
+- [X] handle external resources
 - [ ] Employee file is empty -> log error to console (message empty file) + no email 
 - [ ] Wrong file format
   - [ ] estensione
