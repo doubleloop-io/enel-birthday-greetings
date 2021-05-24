@@ -1,5 +1,9 @@
+import com.icegreen.greenmail.util.GreenMail;
+import com.icegreen.greenmail.util.GreenMailUtil;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BirthdayGreetingsTest {
     @Test
@@ -22,5 +26,14 @@ public class BirthdayGreetingsTest {
 
         //Assert
         //Check email to John Doe has been sent
+    }
+
+    @Test
+    void sendMail() {
+        GreenMail greenMail = new GreenMail();
+        greenMail.start();
+        GreenMailUtil.sendTextEmailTest("to@localhost", "from@localhost", "some subject", "some body");
+        assertEquals("some body", GreenMailUtil.getBody(greenMail.getReceivedMessages()[0]));
+        greenMail.stop();
     }
 }
