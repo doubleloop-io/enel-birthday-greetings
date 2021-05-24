@@ -3,6 +3,10 @@ import com.icegreen.greenmail.util.GreenMailUtil;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BirthdayGreetingsTest {
@@ -29,11 +33,18 @@ public class BirthdayGreetingsTest {
     }
 
     @Test
-    void sendMail() {
+    void sendMail() throws MessagingException {
         GreenMail greenMail = new GreenMail();
         greenMail.start();
-        GreenMailUtil.sendTextEmailTest("to@localhost", "from@localhost", "some subject", "some body");
-        assertEquals("some body", GreenMailUtil.getBody(greenMail.getReceivedMessages()[0]));
+
+        GreenMailUtil.sendTextEmailTest("john.doe@foobar.com", "no-reply@foobar.com", "Happy birthday!", "Happy birthday, dear John!");
+
+        MimeMessage receivedMessage = greenMail.getReceivedMessages()[0];
+        assertEquals("Happy birthday, dear John!", GreenMailUtil.getBody(receivedMessage));
+        assertEquals("Happy birthday!", receivedMessage.getSubject());
+        assertEquals("john.doe@foobar.com", receivedMessage.getRecipients(Message.RecipientType.TO)[0].toString());
+        assertEquals("no-reply@foobar.com", receivedMessage.getFrom()[0].toString());
+
         greenMail.stop();
     }
 }
