@@ -1,5 +1,6 @@
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;
+import kotlin.NotImplementedError;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
@@ -41,8 +43,8 @@ public class BirthdayGreetingsTest {
 
     @Test
     void sendMail() throws MessagingException, UnsupportedEncodingException {
-        GreenMail greenMail = new GreenMail();
-        greenMail.start();
+        LocalSmtpServer localSmtpServer = new LocalSmtpServer();
+        localSmtpServer.start();
 
         //Get the session object
         Properties properties = System.getProperties();
@@ -59,12 +61,67 @@ public class BirthdayGreetingsTest {
 
         Transport.send(msg);
 
-        MimeMessage receivedMessage = greenMail.getReceivedMessages()[0];
-        assertEquals("Happy birthday, dear John!", GreenMailUtil.getBody(receivedMessage));
+        MailInfo receivedMessage = localSmtpServer.receivedMessages()[0];
+        assertEquals("no-reply@foobar.com", receivedMessage.getFrom());
+        assertEquals("john.doe@foobar.com", receivedMessage.getTo());
         assertEquals("Happy birthday!", receivedMessage.getSubject());
-        assertEquals("john.doe@foobar.com", receivedMessage.getRecipients(Message.RecipientType.TO)[0].toString());
-        assertEquals("no-reply@foobar.com", receivedMessage.getFrom()[0].toString());
+        assertEquals("Happy birthday, dear John!", receivedMessage.getBody());
 
-        greenMail.stop();
+        localSmtpServer.stop();
+    }
+
+    public static class LocalSmtpServer {
+        private GreenMail greenMail = new GreenMail();
+
+        public void start() {
+            greenMail.start();
+        }
+
+        public void stop() {
+            greenMail.stop();
+        }
+
+        public MailInfo[] receivedMessages() throws MessagingException {
+            ArrayList<MailInfo> received = new ArrayList<>();
+
+            for (MimeMessage receivedMessage : greenMail.getReceivedMessages()) {
+                received.add( new MailInfo(
+                        receivedMessage.getFrom()[0].toString(),
+                        receivedMessage.getRecipients(Message.RecipientType.TO)[0].toString(),
+                        receivedMessage.getSubject(),
+                        GreenMailUtil.getBody(receivedMessage)));
+            }
+            return received.toArray(new MailInfo[0]);
+        }
+    }
+
+    public static class MailInfo {
+        private final String from;
+        private final String to;
+        private final String subject;
+        private final String body;
+
+        public MailInfo(String from, String to, String subject, String body) {
+            this.from = from;
+            this.to = to;
+            this.subject = subject;
+            this.body = body;
+        }
+
+        public String getFrom() {
+            return from;
+        }
+
+        public String getTo() {
+            return to;
+        }
+
+        public String getSubject() {
+            return subject;
+        }
+
+        public String getBody() {
+            return body;
+        }
     }
 }
