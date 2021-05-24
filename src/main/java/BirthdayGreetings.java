@@ -31,6 +31,7 @@ public class BirthdayGreetings {
         //set message headers
         msg.setFrom(new InternetAddress("no-reply@foobar.com"));
         msg.setSubject("Happy birthday!");
+//        msg.setText("Happy birthday, dear " + johnParts[1] + "!");
         msg.setText("Happy birthday, dear John!");
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(johnParts[3], false));
 
