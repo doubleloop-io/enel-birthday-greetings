@@ -102,31 +102,4 @@ public class BirthdayGreetingsTest {
                         "Happy birthday, dear Andrea!"),
                 localSmtpServer.receivedMessages()[1]);
     }
-
-    @Test
-    void sendMail() throws MessagingException {
-        //Get the session object
-        Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", "127.0.0.1");
-        properties.setProperty("mail.smtp.port", "3025");
-        Session session = Session.getDefaultInstance(properties);
-
-        MimeMessage msg = new MimeMessage(session);
-        //set message headers
-        msg.setFrom(new InternetAddress("no-reply@foobar.com"));
-        msg.setSubject("Happy birthday!");
-        msg.setText("Happy birthday, dear John!");
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("john.doe@foobar.com", false));
-
-        Transport.send(msg);
-
-        MailInfo receivedMessage = localSmtpServer.receivedMessages()[0];
-        MailInfo expected = new MailInfo(
-                "no-reply@foobar.com",
-                "john.doe@foobar.com",
-                "Happy birthday!",
-                "Happy birthday, dear John!");
-        assertEquals(expected, receivedMessage);
-    }
-
 }
