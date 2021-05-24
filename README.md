@@ -32,7 +32,7 @@ http://matteo.vaccari.name/blog/archives/154
   
   Then:
   email to John Doe, subject `Happy birthday!`, body `Happy birthday, dear John!`
-- [ ] Many greetings
+- [X] Many greetings
   Given:
   ```
   last_name, first_name, date_of_birth, email
@@ -46,7 +46,7 @@ http://matteo.vaccari.name/blog/archives/154
 
   Then:
   email to Mary Ann and Andrea Vallotti, check body and subject
-- [ ] No greetings
+- [X] No greetings
   Given:
   ```
   last_name, first_name, date_of_birth, email
