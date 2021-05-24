@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,7 +20,9 @@ public class BirthdayGreetings {
         // - send email
         List<String> lines = Files.readAllLines(Path.of("employee.csv"));
         String johnDoe = lines.get(1);
-        String[] johnParts = johnDoe.split(",");
+        String[] johnParts = Arrays.stream(johnDoe.split(","))
+                .map(String::trim)
+                .toArray(String[]::new);
 
         //Get the session object
         Properties properties = System.getProperties();
@@ -31,8 +34,8 @@ public class BirthdayGreetings {
         //set message headers
         msg.setFrom(new InternetAddress("no-reply@foobar.com"));
         msg.setSubject("Happy birthday!");
-//        msg.setText("Happy birthday, dear " + johnParts[1] + "!");
-        msg.setText("Happy birthday, dear John!");
+        msg.setText("Happy birthday, dear " + johnParts[1] + "!");
+//        msg.setText("Happy birthday, dear John!");
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(johnParts[3], false));
 
         Transport.send(msg);
