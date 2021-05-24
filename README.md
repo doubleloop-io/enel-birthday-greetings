@@ -13,6 +13,11 @@ The application should be runnable from command line.
 ## Reference
 http://matteo.vaccari.name/blog/archives/154
 
+## Dependencies
+- server SMTP
+- File System
+- Time
+
 ## Test list
 - [ ] one greeting
   Given:
