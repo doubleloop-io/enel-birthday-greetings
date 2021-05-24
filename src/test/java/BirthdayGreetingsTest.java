@@ -38,7 +38,6 @@ public class BirthdayGreetingsTest {
 
     @Test
     void oneGreeting() throws IOException, MessagingException {
-        //Arrange
         Files.write(Path.of("employee.csv"),
                 Arrays.asList(
                         "last_name, first_name, date_of_birth, email",
@@ -46,10 +45,8 @@ public class BirthdayGreetingsTest {
                         "Ann, Mary, 1975/09/11, mary.ann@foobar.com"),
                 StandardCharsets.US_ASCII);
 
-        //Act - Send greetings Today: 2021/10/08
         new BirthdayGreetings().send(LocalDate.of(2021, 10, 8));
 
-        //Assert
         assertThat(localSmtpServer.receivedMessages()).hasSize(1);
         MailInfo receivedMessage = localSmtpServer.receivedMessages()[0];
         MailInfo expected = new MailInfo(
