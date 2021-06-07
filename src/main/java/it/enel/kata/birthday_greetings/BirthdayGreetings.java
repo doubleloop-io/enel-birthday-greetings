@@ -31,15 +31,13 @@ public class BirthdayGreetings {
             String[] johnParts = Arrays.stream(line.split(","))
                     .map(String::trim)
                     .toArray(String[]::new);
-            String employeeName = johnParts[1];
-            String employeeEmail = johnParts[3];
             LocalDate employeeBirthDate = LocalDate.parse(
                     johnParts[2],
                     DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            Employee employee = new Employee(johnParts[1], johnParts[3], employeeBirthDate);
 
-            if(employeeBirthDate.getMonth() == today.getMonth() &&
-                    employeeBirthDate.getDayOfMonth() == today.getDayOfMonth()) {
-                MailInfo mail = MailInfo.greetings(employeeName, employeeEmail);
+            if(employee.isBirthday(today)) {
+                MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
 
                 Properties properties = System.getProperties();
                 properties.setProperty("mail.smtp.host", smtpConfig.getHost());
@@ -56,5 +54,4 @@ public class BirthdayGreetings {
             }
         }
     }
-
 }

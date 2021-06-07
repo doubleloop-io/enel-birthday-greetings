@@ -24,7 +24,7 @@ http://matteo.vaccari.name/blog/archives/154
 - [ ] Config mail client
 - [X] Compose email
 - [ ] Send email
-- [ ] Check birthday
+- [X] Check birthday
 
 ## Test list
 - [X] pass filepath to it.enel.kata.birthday_greetings.BirthdayGreetings
