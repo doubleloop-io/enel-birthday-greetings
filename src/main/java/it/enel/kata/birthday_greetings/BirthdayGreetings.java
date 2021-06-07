@@ -39,19 +39,22 @@ public class BirthdayGreetings {
 
             if(employeeBirthDate.getMonth() == today.getMonth() &&
                     employeeBirthDate.getDayOfMonth() == today.getDayOfMonth()) {
+                MailInfo mail = MailInfo.greetings(employeeName, employeeEmail);
+
                 Properties properties = System.getProperties();
                 properties.setProperty("mail.smtp.host", smtpConfig.getHost());
                 properties.setProperty("mail.smtp.port", Integer.toString(smtpConfig.getPort()));
                 Session session = Session.getDefaultInstance(properties);
 
                 MimeMessage msg = new MimeMessage(session);
-                msg.setFrom(new InternetAddress("no-reply@foobar.com"));
-                msg.setSubject("Happy birthday!");
-                msg.setText("Happy birthday, dear " + employeeName + "!");
-                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(employeeEmail, false));
+                msg.setFrom(new InternetAddress(mail.getFrom()));
+                msg.setSubject(mail.getSubject());
+                msg.setText(mail.getBody());
+                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getTo(), false));
 
                 Transport.send(msg);
             }
         }
     }
+
 }

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import it.enel.kata.birthday_greetings.support.LocalSmtpServer;
-import it.enel.kata.birthday_greetings.support.MailInfo;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -48,11 +47,7 @@ public class BirthdayGreetingsTest {
 
         assertThat(localSmtpServer.receivedMessages()).hasSize(1);
         MailInfo receivedMessage = localSmtpServer.receivedMessages()[0];
-        MailInfo expected = new MailInfo(
-                "no-reply@foobar.com",
-                "john.doe@foobar.com",
-                "Happy birthday!",
-                "Happy birthday, dear John!");
+        MailInfo expected = MailInfo.greetings("John", "john.doe@foobar.com");
         assertEquals(expected, receivedMessage);
     }
 
@@ -87,18 +82,10 @@ public class BirthdayGreetingsTest {
 
         assertThat(localSmtpServer.receivedMessages()).hasSize(2);
         assertEquals(
-                new MailInfo(
-                        "no-reply@foobar.com",
-                        "mary.ann@foobar.com",
-                        "Happy birthday!",
-                        "Happy birthday, dear Mary!"),
+                MailInfo.greetings("Mary", "mary.ann@foobar.com"),
                 localSmtpServer.receivedMessages()[0]);
         assertEquals(
-                new MailInfo(
-                        "no-reply@foobar.com",
-                        "andrea.vallotti@foobar.com",
-                        "Happy birthday!",
-                        "Happy birthday, dear Andrea!"),
+                MailInfo.greetings("Andrea", "andrea.vallotti@foobar.com"),
                 localSmtpServer.receivedMessages()[1]);
     }
 }

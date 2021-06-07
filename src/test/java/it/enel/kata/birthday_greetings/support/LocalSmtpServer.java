@@ -2,6 +2,7 @@ package it.enel.kata.birthday_greetings.support;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;
+import it.enel.kata.birthday_greetings.MailInfo;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;

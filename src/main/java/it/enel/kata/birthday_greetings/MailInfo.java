@@ -1,4 +1,4 @@
-package it.enel.kata.birthday_greetings.support;
+package it.enel.kata.birthday_greetings;
 
 import java.util.Objects;
 
@@ -13,6 +13,10 @@ public class MailInfo {
         this.to = to;
         this.subject = subject;
         this.body = body;
+    }
+
+    public static MailInfo greetings(String name, String to) {
+        return new MailInfo("no-reply@foobar.com", to, "Happy birthday!", "Happy birthday, dear " + name + "!");
     }
 
     public String getFrom() {
