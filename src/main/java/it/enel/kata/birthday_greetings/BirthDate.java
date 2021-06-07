@@ -11,9 +11,16 @@ public class BirthDate {
     }
 
     boolean isBirthday(LocalDate today) {
-        if (date.getDayOfMonth() == 29 && date.getMonth() == Month.FEBRUARY)
-            return today.getMonth() == Month.FEBRUARY && today.getDayOfMonth() == 28;
+        return isTypicalBirthday(today) || isBirthdayOn29thFeb(today);
+    }
+
+    private boolean isTypicalBirthday(LocalDate today) {
         return date.getMonth() == today.getMonth() &&
                 date.getDayOfMonth() == today.getDayOfMonth();
+    }
+
+    private boolean isBirthdayOn29thFeb(LocalDate today) {
+        return date.getDayOfMonth() == 29 && date.getMonth() == Month.FEBRUARY &&
+                today.getMonth() == Month.FEBRUARY && today.getDayOfMonth() == 28;
     }
 }
