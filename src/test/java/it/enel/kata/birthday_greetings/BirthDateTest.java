@@ -22,4 +22,12 @@ public class BirthDateTest {
 
         assertThat(employee.isBirthday(today)).isFalse();
     }
+
+    @Test
+    void born29thFeb() {
+        BirthDate employee = new BirthDate(LocalDate.of(2020, 2, 29));
+        LocalDate today = LocalDate.of(2021, 2, 28);
+
+        assertThat(employee.isBirthday(today)).isTrue();
+    }
 }
