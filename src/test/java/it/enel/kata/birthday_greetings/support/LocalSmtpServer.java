@@ -1,4 +1,4 @@
-package support;
+package it.enel.kata.birthday_greetings.support;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.GreenMailUtil;

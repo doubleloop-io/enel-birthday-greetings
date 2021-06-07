@@ -1,4 +1,4 @@
-package support;
+package it.enel.kata.birthday_greetings.support;
 
 import java.util.Objects;
 

@@ -1,3 +1,5 @@
+package it.enel.kata.birthday_greetings;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
