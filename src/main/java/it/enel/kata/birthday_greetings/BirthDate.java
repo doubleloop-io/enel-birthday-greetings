@@ -20,7 +20,10 @@ public class BirthDate {
     }
 
     private boolean isBirthdayOn29thFeb(LocalDate today) {
-        return date.getDayOfMonth() == 29 && date.getMonth() == Month.FEBRUARY &&
-                today.getMonth() == Month.FEBRUARY && today.getDayOfMonth() == 28;
+        return !today.isLeapYear() &&
+                date.getDayOfMonth() == 29 &&
+                date.getMonth() == Month.FEBRUARY &&
+                today.getDayOfMonth() == 28 &&
+                today.getMonth() == Month.FEBRUARY;
     }
 }

@@ -27,7 +27,7 @@ http://matteo.vaccari.name/blog/archives/154
 - [X] Check birthday
 
 ## Test list
-- [ ] Employee
+- [ ] BirthDate
   - [X] birthDate 14/09/1995, today 14/09/2021 -> is birthday
   - [X] birthDate 14/09/1995, today 15/09/2021 -> is NOT birthday
   - [X] birthDate 29/02/2020, today 28/02/2021 -> is birthday

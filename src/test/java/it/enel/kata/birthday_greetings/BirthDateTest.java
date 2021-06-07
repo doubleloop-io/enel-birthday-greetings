@@ -27,7 +27,9 @@ public class BirthDateTest {
     void born29thFeb() {
         BirthDate employee = new BirthDate(LocalDate.of(2020, 2, 29));
         LocalDate today = LocalDate.of(2021, 2, 28);
+        LocalDate leapYear = LocalDate.of(2024, 2, 28);
 
         assertThat(employee.isBirthday(today)).isTrue();
+        assertThat(employee.isBirthday(leapYear)).isFalse();
     }
 }
