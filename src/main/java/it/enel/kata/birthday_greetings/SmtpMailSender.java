@@ -15,18 +15,22 @@ public class SmtpMailSender {
         this.smtpConfig = smtpConfig;
     }
 
-    void sendMail(MailInfo mail) throws MessagingException {
+    void sendMail(MailInfo mail) {
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtp.host", smtpConfig.getHost());
         properties.setProperty("mail.smtp.port", Integer.toString(smtpConfig.getPort()));
         Session session = Session.getDefaultInstance(properties);
 
-        MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(mail.getFrom()));
-        msg.setSubject(mail.getSubject());
-        msg.setText(mail.getBody());
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getTo(), false));
+        try {
+            MimeMessage msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(mail.getFrom()));
+            msg.setSubject(mail.getSubject());
+            msg.setText(mail.getBody());
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getTo(), false));
 
-        Transport.send(msg);
+            Transport.send(msg);
+        } catch (MessagingException ex) {
+            throw new NoDeliveryException(mail.getTo(), ex);
+        }
     }
 }

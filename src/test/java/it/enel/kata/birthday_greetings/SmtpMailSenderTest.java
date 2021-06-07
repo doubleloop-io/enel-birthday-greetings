@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import javax.mail.MessagingException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class SmtpMailSenderTest {
     private LocalSmtpServer localSmtpServer;
@@ -47,5 +48,14 @@ public class SmtpMailSenderTest {
                 MailInfo.greetings("Andrea", "andrea@foobar.com"),
                 MailInfo.greetings("Mary", "mary@foobar.com"),
                 MailInfo.greetings("John", "john@foobar.com"));
+    }
+
+    @Test
+    void smtpDown() {
+        SmtpMailSender smtpMailSender = new SmtpMailSender(new SmtpConfig("127.0.0.1", 666));
+
+        assertThatThrownBy(() -> smtpMailSender.sendMail(MailInfo.greetings("Andrea", "andrea@foobar.com")))
+            .isInstanceOf(NoDeliveryException.class)
+            .hasMessageContaining("andrea@foobar.com");
     }
 }
