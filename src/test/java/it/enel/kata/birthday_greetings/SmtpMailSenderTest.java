@@ -34,4 +34,18 @@ public class SmtpMailSenderTest {
         MailInfo expected = MailInfo.greetings("Andrea", "andrea@foobar.com");
         assertThat(localSmtpServer.receivedMessages()).contains(expected);
     }
+
+    @Test
+    void manyMails() throws MessagingException {
+        SmtpMailSender smtpMailSender = new SmtpMailSender(smtpConfig);
+
+        smtpMailSender.sendMail(MailInfo.greetings("Andrea", "andrea@foobar.com"));
+        smtpMailSender.sendMail(MailInfo.greetings("Mary", "mary@foobar.com"));
+        smtpMailSender.sendMail(MailInfo.greetings("John", "john@foobar.com"));
+
+        assertThat(localSmtpServer.receivedMessages()).contains(
+                MailInfo.greetings("Andrea", "andrea@foobar.com"),
+                MailInfo.greetings("Mary", "mary@foobar.com"),
+                MailInfo.greetings("John", "john@foobar.com"));
+    }
 }
