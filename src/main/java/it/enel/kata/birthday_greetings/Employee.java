@@ -5,9 +5,9 @@ import java.time.LocalDate;
 public class Employee {
     private final String name;
     private final String email;
-    private final LocalDate birthDate;
+    private final BirthDate birthDate;
 
-    public Employee(String name, String email, LocalDate birthDate) {
+    public Employee(String name, String email, BirthDate birthDate) {
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
@@ -22,7 +22,6 @@ public class Employee {
     }
 
     public boolean isBirthday(LocalDate today) {
-        return birthDate.getMonth() == today.getMonth() &&
-                birthDate.getDayOfMonth() == today.getDayOfMonth();
+        return birthDate.isBirthday(today);
     }
 }

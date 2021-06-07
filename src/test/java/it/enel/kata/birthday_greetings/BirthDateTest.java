@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EmployeeTest {
+public class BirthDateTest {
     @Test
     void isBirthday() {
-        Employee employee = new Employee("Omar", "omar@foobar.com", LocalDate.of(1995, 9, 14));
+        BirthDate employee = new BirthDate(LocalDate.of(1995, 9, 14));
         LocalDate today = LocalDate.of(2021, 9, 14);
 
         assertThat(employee.isBirthday(today)).isTrue();

@@ -34,7 +34,7 @@ public class BirthdayGreetings {
             LocalDate employeeBirthDate = LocalDate.parse(
                     johnParts[2],
                     DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-            Employee employee = new Employee(johnParts[1], johnParts[3], employeeBirthDate);
+            Employee employee = new Employee(johnParts[1], johnParts[3], new BirthDate(employeeBirthDate));
 
             if(employee.isBirthday(today)) {
                 MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
