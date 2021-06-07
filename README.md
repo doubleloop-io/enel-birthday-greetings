@@ -23,7 +23,7 @@ http://matteo.vaccari.name/blog/archives/154
 - [ ] Parse CSV
 - [ ] Config mail client
 - [X] Compose email
-- [ ] Send email
+- [X] Send email
 - [X] Check birthday
 
 ## Test list

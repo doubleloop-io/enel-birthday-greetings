@@ -8,10 +8,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class AppleJuice {
-    public final SmtpConfig smtpConfig;
+public class SmtpMailSender {
+    private final SmtpConfig smtpConfig;
 
-    public AppleJuice(SmtpConfig smtpConfig) {
+    public SmtpMailSender(SmtpConfig smtpConfig) {
         this.smtpConfig = smtpConfig;
     }
 

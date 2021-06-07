@@ -11,11 +11,11 @@ import java.util.List;
 public class BirthdayGreetings {
 
     private final FileConfig fileConfig;
-    private final AppleJuice appleJuice;
+    private final SmtpMailSender smtpMailSender;
 
     public BirthdayGreetings(FileConfig fileConfig, SmtpConfig smtpConfig) {
         this.fileConfig = fileConfig;
-        appleJuice = new AppleJuice(smtpConfig);
+        smtpMailSender = new SmtpMailSender(smtpConfig);
     }
 
     public void send(LocalDate today) throws MessagingException, IOException {
@@ -32,7 +32,7 @@ public class BirthdayGreetings {
 
             if(employee.isBirthday(today)) {
                 MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
-                appleJuice.sendMail(mail);
+                smtpMailSender.sendMail(mail);
             }
         }
     }
