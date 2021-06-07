@@ -1,6 +1,5 @@
 package it.enel.kata.birthday_greetings;
 
-import javax.mail.MessagingException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
@@ -18,7 +17,7 @@ public class BirthdayGreetings {
         smtpMailSender = new SmtpMailSender(smtpConfig);
     }
 
-    public void send(LocalDate today) throws MessagingException, IOException {
+    public void send(LocalDate today) throws IOException {
         List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
