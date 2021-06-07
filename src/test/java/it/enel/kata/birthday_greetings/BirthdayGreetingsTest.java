@@ -19,11 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BirthdayGreetingsTest {
     private LocalSmtpServer localSmtpServer;
+    private FileConfig fileConfig;
 
     @BeforeEach
     void setUp() {
         localSmtpServer = new LocalSmtpServer();
         localSmtpServer.start();
+        fileConfig = new FileConfig(Path.of("employees_test.csv"));
     }
 
     @AfterEach
@@ -33,14 +35,14 @@ public class BirthdayGreetingsTest {
 
     @Test
     void oneGreeting() throws IOException, MessagingException {
-        Files.write(Path.of("employee.csv"),
+        Files.write(fileConfig.getEmployeesFilePath(),
                 Arrays.asList(
                         "last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com",
                         "Ann, Mary, 1975/09/11, mary.ann@foobar.com"),
                 StandardCharsets.US_ASCII);
 
-        new BirthdayGreetings().send(LocalDate.of(2021, 10, 8));
+        new BirthdayGreetings(fileConfig).send(LocalDate.of(2021, 10, 8));
 
         assertThat(localSmtpServer.receivedMessages()).hasSize(1);
         MailInfo receivedMessage = localSmtpServer.receivedMessages()[0];
@@ -54,7 +56,7 @@ public class BirthdayGreetingsTest {
 
     @Test
     void noGreetings() throws IOException, MessagingException {
-        Files.write(Path.of("employee.csv"),
+        Files.write(fileConfig.getEmployeesFilePath(),
                 Arrays.asList(
                         "last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com",
@@ -63,14 +65,14 @@ public class BirthdayGreetingsTest {
                 ),
                 StandardCharsets.US_ASCII);
 
-        new BirthdayGreetings().send(LocalDate.of(2021, 9, 12));
+        new BirthdayGreetings(fileConfig).send(LocalDate.of(2021, 9, 12));
 
         assertThat(localSmtpServer.receivedMessages()).isEmpty();
     }
 
     @Test
     void manyGreetings() throws IOException, MessagingException {
-        Files.write(Path.of("employee.csv"),
+        Files.write(fileConfig.getEmployeesFilePath(),
                 Arrays.asList(
                         "last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com",
@@ -79,7 +81,7 @@ public class BirthdayGreetingsTest {
                 ),
                 StandardCharsets.US_ASCII);
 
-        new BirthdayGreetings().send(LocalDate.of(2021, 9, 11));
+        new BirthdayGreetings(fileConfig).send(LocalDate.of(2021, 9, 11));
 
         assertThat(localSmtpServer.receivedMessages()).hasSize(2);
         assertEquals(

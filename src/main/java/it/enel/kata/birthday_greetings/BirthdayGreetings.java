@@ -8,7 +8,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -16,9 +15,15 @@ import java.util.List;
 import java.util.Properties;
 
 public class BirthdayGreetings {
+
+    private final FileConfig fileConfig;
+
+    public BirthdayGreetings(FileConfig fileConfig) {
+        this.fileConfig = fileConfig;
+    }
+
     public void send(LocalDate today) throws MessagingException, IOException {
-        // - get filepathas parameter
-        List<String> lines = Files.readAllLines(Path.of("employee.csv"));
+        List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             String[] johnParts = Arrays.stream(line.split(","))
