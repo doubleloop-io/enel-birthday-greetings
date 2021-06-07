@@ -19,7 +19,7 @@ http://matteo.vaccari.name/blog/archives/154
 - Time
 
 ## Test list
-- [ ] pass filepath to it.enel.kata.birthday_greetings.BirthdayGreetings
+- [X] pass filepath to it.enel.kata.birthday_greetings.BirthdayGreetings
 - [ ] pass SMTP server configuration to it.enel.kata.birthday_greetings.BirthdayGreetings
 - [ ] execute console application
 - [ ] Employee file is empty -> log error to console (message empty file) + no email

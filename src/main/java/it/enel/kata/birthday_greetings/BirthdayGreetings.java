@@ -17,9 +17,11 @@ import java.util.Properties;
 public class BirthdayGreetings {
 
     private final FileConfig fileConfig;
+    private final SmtpConfig smtpConfig;
 
-    public BirthdayGreetings(FileConfig fileConfig) {
+    public BirthdayGreetings(FileConfig fileConfig, SmtpConfig smtpConfig) {
         this.fileConfig = fileConfig;
+        this.smtpConfig = smtpConfig;
     }
 
     public void send(LocalDate today) throws MessagingException, IOException {
@@ -38,8 +40,8 @@ public class BirthdayGreetings {
             if(employeeBirthDate.getMonth() == today.getMonth() &&
                     employeeBirthDate.getDayOfMonth() == today.getDayOfMonth()) {
                 Properties properties = System.getProperties();
-                properties.setProperty("mail.smtp.host", "127.0.0.1");
-                properties.setProperty("mail.smtp.port", "3025");
+                properties.setProperty("mail.smtp.host", smtpConfig.getHost());
+                properties.setProperty("mail.smtp.port", Integer.toString(smtpConfig.getPort()));
                 Session session = Session.getDefaultInstance(properties);
 
                 MimeMessage msg = new MimeMessage(session);
