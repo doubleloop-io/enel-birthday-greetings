@@ -21,16 +21,12 @@ http://matteo.vaccari.name/blog/archives/154
 ## Responsibilities
 - [ ] Read from file
 - [ ] Parse CSV
-- [ ] Config mail client
+- [X] Config mail client
 - [X] Compose email
 - [X] Send email
 - [X] Check birthday
 
 ## Test list
-- [ ] SmtpMailSender
-  - [ ] send one mail
-  - [ ] send many mail
-  - [ ] SMTP is down
 - [ ] MailInfo
   - [ ] check mail format
 - [ ] Employee file is empty -> log error to console (message empty file) + no email
@@ -41,6 +37,10 @@ http://matteo.vaccari.name/blog/archives/154
   - [ ] numero di colonne errato
   - [ ] data non valida, e.g. 2021/02/29
 
+- [X] SmtpMailSender
+  - [X] send one mail
+  - [X] send many mail
+  - [X] SMTP is down
 - [X] BirthDate
   - [X] birthDate 14/09/1995, today 14/09/2021 -> is birthday
   - [X] birthDate 14/09/1995, today 15/09/2021 -> is NOT birthday
