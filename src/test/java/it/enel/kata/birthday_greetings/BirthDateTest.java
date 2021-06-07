@@ -14,4 +14,12 @@ public class BirthDateTest {
 
         assertThat(employee.isBirthday(today)).isTrue();
     }
+
+    @Test
+    void isNotBirthday() {
+        BirthDate employee = new BirthDate(LocalDate.of(1995, 9, 14));
+        LocalDate today = LocalDate.of(2021, 9, 15);
+
+        assertThat(employee.isBirthday(today)).isFalse();
+    }
 }
