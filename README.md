@@ -19,6 +19,17 @@ http://matteo.vaccari.name/blog/archives/154
 - Time
 
 ## Test list
+- [ ] pass filepath to it.enel.kata.birthday_greetings.BirthdayGreetings
+- [ ] pass SMTP server configuration to it.enel.kata.birthday_greetings.BirthdayGreetings
+- [ ] execute console application
+- [ ] Employee file is empty -> log error to console (message empty file) + no email
+- [ ] Wrong file format
+  - [ ] estensione
+  - [ ] formato mail non valido
+  - [ ] formato data non valido
+  - [ ] numero di colonne errato
+  - [ ] data non valida, e.g. 2021/02/29
+
 - [X] one greeting
   Given:
   ```
@@ -60,14 +71,4 @@ http://matteo.vaccari.name/blog/archives/154
 
   Then:
   no email
-- [ ] pass filepath to it.enel.kata.birthday_greetings.BirthdayGreetings
-- [ ] pass SMTP server configuration to it.enel.kata.birthday_greetings.BirthdayGreetings 
 - [X] handle external resources
-- [ ] Employee file is empty -> log error to console (message empty file) + no email 
-- [ ] Wrong file format
-  - [ ] estensione
-  - [ ] formato mail non valido
-  - [ ] formato data non valido
-  - [ ] numero di colonne errato
-  - [ ] data non valida, e.g. 2021/02/29
- 
