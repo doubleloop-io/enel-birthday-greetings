@@ -31,13 +31,12 @@ public class BirthdayGreetings {
     }
 
     private Employee parseEmployeeLine(String line) {
-        String[] johnParts = Arrays.stream(line.split(","))
+        String[] employeeParts = Arrays.stream(line.split(","))
                 .map(String::trim)
                 .toArray(String[]::new);
         LocalDate employeeBirthDate = LocalDate.parse(
-                johnParts[2],
+                employeeParts[2],
                 DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        Employee employee = new Employee(johnParts[1], johnParts[3], new BirthDate(employeeBirthDate));
-        return employee;
+        return new Employee(employeeParts[1], employeeParts[3], new BirthDate(employeeBirthDate));
     }
 }
