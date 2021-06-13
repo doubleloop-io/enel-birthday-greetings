@@ -11,10 +11,12 @@ import java.util.List;
 public class BirthdayGreetings {
 
     private final FileConfig fileConfig;
+    private final CsvEmployeeCatalog csvEmployeeCatalog;
     private final SmtpMailSender smtpMailSender;
 
     public BirthdayGreetings(FileConfig fileConfig, SmtpConfig smtpConfig) {
         this.fileConfig = fileConfig;
+        csvEmployeeCatalog = new CsvEmployeeCatalog(fileConfig);
         smtpMailSender = new SmtpMailSender(smtpConfig);
     }
 
