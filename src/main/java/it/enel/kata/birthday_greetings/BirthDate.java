@@ -26,4 +26,11 @@ public class BirthDate {
                 today.getDayOfMonth() == 28 &&
                 today.getMonth() == Month.FEBRUARY;
     }
+
+    @Override
+    public String toString() {
+        return "BirthDate{" +
+                "date=" + date +
+                '}';
+    }
 }

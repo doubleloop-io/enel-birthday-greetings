@@ -24,4 +24,13 @@ public class Employee {
     public boolean isBirthday(LocalDate today) {
         return birthDate.isBirthday(today);
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }
