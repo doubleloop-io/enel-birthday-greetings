@@ -3,7 +3,6 @@ package it.enel.kata.birthday_greetings;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,12 +40,6 @@ public class BirthdayGreetings {
         String[] employeeParts = Arrays.stream(line.split(","))
                 .map(String::trim)
                 .toArray(String[]::new);
-        return new Employee(employeeParts[1], employeeParts[3], new BirthDate(parseDate(employeeParts[2])));
-    }
-
-    private LocalDate parseDate(String date) {
-        return LocalDate.parse(
-                date,
-                DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        return new Employee(employeeParts[1], employeeParts[3], new BirthDate(csvEmployeeCatalog.parseDate(employeeParts[2])));
     }
 }
