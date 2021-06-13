@@ -17,20 +17,20 @@ public class SmtpMailSender {
 
     void sendMail(MailInfo mail) {
         Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", smtpConfig.getHost());
-        properties.setProperty("mail.smtp.port", Integer.toString(smtpConfig.getPort()));
+        properties.setProperty("mail.smtp.host", smtpConfig.host());
+        properties.setProperty("mail.smtp.port", Integer.toString(smtpConfig.port()));
         Session session = Session.getDefaultInstance(properties);
 
         try {
             MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(mail.getFrom()));
-            msg.setSubject(mail.getSubject());
-            msg.setText(mail.getBody());
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getTo(), false));
+            msg.setFrom(new InternetAddress(mail.from()));
+            msg.setSubject(mail.subject());
+            msg.setText(mail.body());
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.to(), false));
 
             Transport.send(msg);
         } catch (MessagingException ex) {
-            throw new NoDeliveryException(mail.getTo(), ex);
+            throw new NoDeliveryException(mail.to(), ex);
         }
     }
 }

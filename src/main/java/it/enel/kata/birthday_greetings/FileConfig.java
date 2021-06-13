@@ -9,7 +9,7 @@ public class FileConfig {
         this.employeesFilePath = employeesFilePath;
     }
 
-    public Path getEmployeesFilePath() {
+    public Path employeesFilePath() {
         return employeesFilePath;
     }
 }

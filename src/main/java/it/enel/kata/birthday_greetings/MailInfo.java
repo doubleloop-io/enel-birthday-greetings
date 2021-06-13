@@ -19,19 +19,19 @@ public class MailInfo {
         return new MailInfo("no-reply@foobar.com", to, "Happy birthday!", "Happy birthday, dear " + name + "!");
     }
 
-    public String getFrom() {
+    public String from() {
         return from;
     }
 
-    public String getTo() {
+    public String to() {
         return to;
     }
 
-    public String getSubject() {
+    public String subject() {
         return subject;
     }
 
-    public String getBody() {
+    public String body() {
         return body;
     }
 

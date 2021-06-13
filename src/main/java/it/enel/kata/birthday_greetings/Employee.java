@@ -14,11 +14,11 @@ public class Employee {
         this.birthDate = birthDate;
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
 
-    public String getEmail() {
+    public String email() {
         return email;
     }
 

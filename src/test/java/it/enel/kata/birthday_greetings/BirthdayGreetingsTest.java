@@ -36,7 +36,7 @@ public class BirthdayGreetingsTest {
 
     @Test
     void oneGreeting() throws IOException, MessagingException {
-        Files.write(fileConfig.getEmployeesFilePath(),
+        Files.write(fileConfig.employeesFilePath(),
                 Arrays.asList(
                         "last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com",
@@ -53,7 +53,7 @@ public class BirthdayGreetingsTest {
 
     @Test
     void noGreetings() throws IOException, MessagingException {
-        Files.write(fileConfig.getEmployeesFilePath(),
+        Files.write(fileConfig.employeesFilePath(),
                 Arrays.asList(
                         "last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com",
@@ -69,7 +69,7 @@ public class BirthdayGreetingsTest {
 
     @Test
     void manyGreetings() throws IOException, MessagingException {
-        Files.write(fileConfig.getEmployeesFilePath(),
+        Files.write(fileConfig.employeesFilePath(),
                 Arrays.asList(
                         "last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com",

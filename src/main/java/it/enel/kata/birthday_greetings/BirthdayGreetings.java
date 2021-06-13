@@ -15,7 +15,7 @@ public class BirthdayGreetings {
     public void send(LocalDate today) throws IOException {
         for (Employee employee : csvEmployeeCatalog.loadEmployees()) {
             if(employee.isBirthday(today)) {
-                MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
+                MailInfo mail = MailInfo.greetings(employee.name(), employee.email());
                 smtpMailSender.sendMail(mail);
             }
         }

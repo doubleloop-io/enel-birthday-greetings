@@ -27,8 +27,8 @@ public class CsvEmployeeCatalog {
     }
 
     public Employee[] loadEmployees() throws IOException {
-        if (!Files.exists(fileConfig.getEmployeesFilePath())) return new Employee[0];
-        return Files.readAllLines(fileConfig.getEmployeesFilePath()).stream()
+        if (!Files.exists(fileConfig.employeesFilePath())) return new Employee[0];
+        return Files.readAllLines(fileConfig.employeesFilePath()).stream()
                 .skip(1)
                 .map(this::parseEmployeeLine)
                 .toArray(Employee[]::new);

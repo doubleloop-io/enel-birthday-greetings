@@ -9,11 +9,11 @@ public class SmtpConfig {
         this.port = port;
     }
 
-    public String getHost() {
+    public String host() {
         return host;
     }
 
-    public int getPort() {
+    public int port() {
         return port;
     }
 }
