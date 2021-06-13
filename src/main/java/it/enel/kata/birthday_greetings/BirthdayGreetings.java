@@ -21,18 +21,23 @@ public class BirthdayGreetings {
         List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
-            String[] johnParts = Arrays.stream(line.split(","))
-                    .map(String::trim)
-                    .toArray(String[]::new);
-            LocalDate employeeBirthDate = LocalDate.parse(
-                    johnParts[2],
-                    DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-            Employee employee = new Employee(johnParts[1], johnParts[3], new BirthDate(employeeBirthDate));
+            Employee employee = parseEmployeeLine(line);
 
             if(employee.isBirthday(today)) {
                 MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
                 smtpMailSender.sendMail(mail);
             }
         }
+    }
+
+    private Employee parseEmployeeLine(String line) {
+        String[] johnParts = Arrays.stream(line.split(","))
+                .map(String::trim)
+                .toArray(String[]::new);
+        LocalDate employeeBirthDate = LocalDate.parse(
+                johnParts[2],
+                DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        Employee employee = new Employee(johnParts[1], johnParts[3], new BirthDate(employeeBirthDate));
+        return employee;
     }
 }
