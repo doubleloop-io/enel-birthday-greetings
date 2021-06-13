@@ -27,7 +27,7 @@ http://matteo.vaccari.name/blog/archives/154
 - [X] Check birthday
 
 ## Test list
-- [ ] simplify BirthDate instantiation in tests
+- [X] simplify BirthDate instantiation in tests
 - [ ] CsvEmployeeCatalog
   - [X] one employee
   - [X] many employees
