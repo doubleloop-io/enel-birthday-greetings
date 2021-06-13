@@ -26,14 +26,14 @@ public class BirthdayGreetings {
             employees.add(parseEmployeeLine(line));
         }
         for (Employee employee : employees) {
-        }
-        for (String line : lines.stream().skip(1).toArray(String[]::new)) {
-            Employee employee = parseEmployeeLine(line);
-
             if(employee.isBirthday(today)) {
                 MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
                 smtpMailSender.sendMail(mail);
             }
+        }
+        for (String line : lines.stream().skip(1).toArray(String[]::new)) {
+            Employee employee = parseEmployeeLine(line);
+
         }
     }
 
