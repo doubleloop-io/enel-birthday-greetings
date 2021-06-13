@@ -25,6 +25,8 @@ public class BirthdayGreetings {
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             employees.add(parseEmployeeLine(line));
         }
+        for (Employee employee : employees) {
+        }
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             Employee employee = parseEmployeeLine(line);
 
