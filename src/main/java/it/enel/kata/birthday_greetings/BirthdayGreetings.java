@@ -19,8 +19,7 @@ public class BirthdayGreetings {
     }
 
     public void send(LocalDate today) throws IOException {
-        ArrayList<Employee> employees = loadEmployees();
-        for (Employee employee : employees) {
+        for (Employee employee : loadEmployees()) {
             if(employee.isBirthday(today)) {
                 MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
                 smtpMailSender.sendMail(mail);
@@ -28,14 +27,14 @@ public class BirthdayGreetings {
         }
     }
 
-    private ArrayList<Employee> loadEmployees() throws IOException {
+    private Employee[] loadEmployees() throws IOException {
         List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
         ArrayList<Employee> employees = new ArrayList<>();
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             employees.add(parseEmployeeLine(line));
         }
-        return employees;
+        return employees.toArray(new Employee[0]);
     }
 
     private Employee parseEmployeeLine(String line) {
