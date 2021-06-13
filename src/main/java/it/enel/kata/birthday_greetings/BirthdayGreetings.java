@@ -23,6 +23,7 @@ public class BirthdayGreetings {
         ArrayList<Employee> employees = new ArrayList<>();
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
+            employees.add(parseEmployeeLine(line));
         }
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             Employee employee = parseEmployeeLine(line);
