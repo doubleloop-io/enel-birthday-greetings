@@ -1,7 +1,6 @@
 package it.enel.kata.birthday_greetings;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -24,7 +23,6 @@ public class CsvEmployeeCatalogTest {
     }
 
     @Test
-    @Disabled
     void oneEmployee() throws IOException {
         Files.write(fileConfig.getEmployeesFilePath(),
                 Arrays.asList(

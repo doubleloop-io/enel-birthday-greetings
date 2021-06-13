@@ -28,7 +28,7 @@ http://matteo.vaccari.name/blog/archives/154
 
 ## Test list
 - [ ] CsvEmployeeCatalog
-  - [ ] one employee
+  - [X] one employee
   - [ ] many employees
   - [ ] no employees
   - [ ] empty file

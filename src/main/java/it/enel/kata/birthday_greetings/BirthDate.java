@@ -2,6 +2,7 @@ package it.enel.kata.birthday_greetings;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Objects;
 
 public class BirthDate {
     public LocalDate date;
@@ -32,5 +33,18 @@ public class BirthDate {
         return "BirthDate{" +
                 "date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BirthDate birthDate = (BirthDate) o;
+        return date.equals(birthDate.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date);
     }
 }

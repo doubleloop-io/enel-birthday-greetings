@@ -1,6 +1,7 @@
 package it.enel.kata.birthday_greetings;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Employee {
     private final String name;
@@ -32,5 +33,18 @@ public class Employee {
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return name.equals(employee.name) && email.equals(employee.email) && birthDate.equals(employee.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, email, birthDate);
     }
 }
