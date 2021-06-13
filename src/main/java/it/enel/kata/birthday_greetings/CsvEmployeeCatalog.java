@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 public class CsvEmployeeCatalog {
@@ -14,9 +15,13 @@ public class CsvEmployeeCatalog {
     }
 
     public LocalDate parseDate(String date) {
-        return LocalDate.parse(
-                date,
-                DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        try {
+            return LocalDate.parse(
+                    date,
+                    DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        } catch (DateTimeParseException e) {
+            throw new LoadEmployeesException("Invalid date format: " + date, e);
+        }
     }
 
     public Employee parseEmployeeLine(String line) {

@@ -11,6 +11,7 @@ import java.nio.file.StandardOpenOption;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CsvEmployeeCatalogTest {
     private FileConfig fileConfig;
@@ -79,5 +80,21 @@ public class CsvEmployeeCatalogTest {
         Employee[] result = csvEmployeeCatalog.loadEmployees();
 
         assertThat(result).isEmpty();
+    }
+
+    @Test
+    void invalidDateFormat() throws IOException {
+        String wrongDateFormatLine = "Di Domenico, Carlo, 07/06/1982, carlo.didomenico@foobar.com";
+        Files.write(fileConfig.employeesFilePath(),
+                asList("last_name, first_name, date_of_birth, email",
+                        "Doe, John, 1982/10/08, john.doe@foobar.com",
+                        wrongDateFormatLine,
+                        "Vallotti, Andrea, 1977/12/27, andrea.vallotti@foobar.com"),
+                StandardCharsets.US_ASCII);
+
+        assertThatThrownBy(() -> csvEmployeeCatalog.loadEmployees())
+                .isInstanceOf(LoadEmployeesException.class)
+                .hasMessageContaining("date format")
+                .hasMessageContaining("07/06/1982");
     }
 }
