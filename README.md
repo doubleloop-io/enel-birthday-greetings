@@ -31,7 +31,7 @@ http://matteo.vaccari.name/blog/archives/154
 - [ ] CsvEmployeeCatalog
   - [X] one employee
   - [X] many employees
-  - [ ] no employees
+  - [X] no employees
   - [ ] empty file
   - [ ] file not found
   - [ ] Wrong file format

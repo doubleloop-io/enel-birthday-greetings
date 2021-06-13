@@ -52,4 +52,16 @@ public class CsvEmployeeCatalogTest {
                 new Employee("Carlo", "carlo.didomenico@foobar.com", BirthDate.of(1982, 6, 7)),
                 new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8)));
     }
+
+    @Test
+    void noEmployees() throws IOException {
+        Files.write(fileConfig.getEmployeesFilePath(),
+                Arrays.asList(
+                        "last_name, first_name, date_of_birth, email"),
+                StandardCharsets.US_ASCII);
+
+        Employee[] employees = csvEmployeeCatalog.loadEmployees();
+
+        assertThat(employees).isEmpty();
+    }
 }
