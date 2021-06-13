@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class BirthdayGreetings {
 
     public void send(LocalDate today) throws IOException {
         List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
+        ArrayList<Employee> employees = new ArrayList<>();
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             Employee employee = parseEmployeeLine(line);
