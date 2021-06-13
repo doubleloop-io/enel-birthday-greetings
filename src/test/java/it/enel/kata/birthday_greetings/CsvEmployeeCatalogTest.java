@@ -33,7 +33,7 @@ public class CsvEmployeeCatalogTest {
         Employee[] employees = csvEmployeeCatalog.loadEmployees();
 
         assertThat(employees).contains(
-                new Employee("John", "john.doe@foobar.com", new BirthDate(LocalDate.of(1982, 10, 8))));
+                new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8)));
     }
 
     @Test

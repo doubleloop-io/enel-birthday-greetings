@@ -47,4 +47,8 @@ public class BirthDate {
     public int hashCode() {
         return Objects.hash(date);
     }
+
+    public static BirthDate of(int year, int month, int dayOfMonth) {
+        return new BirthDate(LocalDate.of(year, month, dayOfMonth));
+    }
 }
