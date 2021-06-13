@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BirthDateTest {
     @Test
     void isBirthday() {
-        BirthDate employee = new BirthDate(LocalDate.of(1995, 9, 14));
+        BirthDate employee = BirthDate.of(1995, 9, 14);
         LocalDate today = LocalDate.of(2021, 9, 14);
 
         assertThat(employee.isBirthday(today)).isTrue();
@@ -17,7 +17,7 @@ public class BirthDateTest {
 
     @Test
     void isNotBirthday() {
-        BirthDate employee = new BirthDate(LocalDate.of(1995, 9, 14));
+        BirthDate employee = BirthDate.of(1995, 9, 14);
         LocalDate today = LocalDate.of(2021, 9, 15);
 
         assertThat(employee.isBirthday(today)).isFalse();
@@ -25,7 +25,7 @@ public class BirthDateTest {
 
     @Test
     void born29thFeb() {
-        BirthDate employee = new BirthDate(LocalDate.of(2020, 2, 29));
+        BirthDate employee = BirthDate.of(2020, 2, 29);
         LocalDate today = LocalDate.of(2021, 2, 28);
         LocalDate leapYear = LocalDate.of(2024, 2, 28);
 

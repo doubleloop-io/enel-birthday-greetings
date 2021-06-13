@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,8 +48,8 @@ public class CsvEmployeeCatalogTest {
         Employee[] employees = csvEmployeeCatalog.loadEmployees();
 
         assertThat(employees).contains(
-                new Employee("Andrea", "andrea.vallotti@foobar.com", new BirthDate(LocalDate.of(1977, 12, 27))),
-                new Employee("Carlo", "carlo.didomenico@foobar.com", new BirthDate(LocalDate.of(1982, 6, 7))),
-                new Employee("John", "john.doe@foobar.com", new BirthDate(LocalDate.of(1982, 10, 8))));
+                new Employee("Andrea", "andrea.vallotti@foobar.com", BirthDate.of(1977, 12, 27)),
+                new Employee("Carlo", "carlo.didomenico@foobar.com", BirthDate.of(1982, 6, 7)),
+                new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8)));
     }
 }
