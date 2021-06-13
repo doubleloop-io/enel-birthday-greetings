@@ -19,30 +19,32 @@ http://matteo.vaccari.name/blog/archives/154
 - Time
 
 ## Responsibilities
-- [ ] Read from file
-- [ ] Parse CSV
+- [X] Read from file
+- [X] Parse CSV
 - [X] Config mail client
 - [X] Compose email
 - [X] Send email
 - [X] Check birthday
 
 ## Test list
-- [X] remove `get` prefix from methods
-- [X] simplify BirthDate instantiation in tests
 - [ ] CsvEmployeeCatalog
-  - [X] one employee
-  - [X] many employees
-  - [X] no employees
-  - [X] empty file
-  - [X] file not found
   - [ ] Wrong file format
     - [ ] wrong file extension
-    - [ ] invalid date format
     - [ ] wrong number of columns
     - [ ] invalid date, e.g. 2021/02/29
 - [ ] MailInfo
   - [ ] check mail format
 
+- [X] remove `get` prefix from methods
+- [X] simplify BirthDate instantiation in tests
+- [X] CsvEmployeeCatalog
+  - [X] one employee
+  - [X] many employees
+  - [X] no employees
+  - [X] empty file
+  - [X] file not found
+  - [X] Wrong file format
+    - [X] invalid date format
 - [X] SmtpMailSender
   - [X] send one mail
   - [X] send many mail
