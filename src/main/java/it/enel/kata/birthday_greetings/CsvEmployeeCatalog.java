@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class CsvEmployeeCatalog {
     private final FileConfig fileConfig;
@@ -29,13 +27,9 @@ public class CsvEmployeeCatalog {
     }
 
     public Employee[] loadEmployees() throws IOException {
-        List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
-        ArrayList<Employee> employees = new ArrayList<>();
-        Employee[] ret = lines.stream().skip(1).map(this::parseEmployeeLine).toArray(Employee[]::new);
-
-        for (String line : lines.stream().skip(1).toArray(String[]::new)) {
-            employees.add(parseEmployeeLine(line));
-        }
-        return ret;
+        return Files.readAllLines(fileConfig.getEmployeesFilePath()).stream()
+                .skip(1)
+                .map(this::parseEmployeeLine)
+                .toArray(Employee[]::new);
     }
 }
