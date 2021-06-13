@@ -1,8 +1,12 @@
 package it.enel.kata.birthday_greetings;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class CsvEmployeeCatalog {
     public final FileConfig fileConfig;
@@ -22,5 +26,15 @@ public class CsvEmployeeCatalog {
                 .map(String::trim)
                 .toArray(String[]::new);
         return new Employee(employeeParts[1], employeeParts[3], new BirthDate(parseDate(employeeParts[2])));
+    }
+
+    public Employee[] loadEmployees() throws IOException {
+        List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        for (String line : lines.stream().skip(1).toArray(String[]::new)) {
+            employees.add(parseEmployeeLine(line));
+        }
+        return employees.toArray(new Employee[0]);
     }
 }
