@@ -27,9 +27,10 @@ http://matteo.vaccari.name/blog/archives/154
 - [X] Check birthday
 
 ## Test list
+- [ ] simplify BirthDate instantiation in tests
 - [ ] CsvEmployeeCatalog
   - [X] one employee
-  - [ ] many employees
+  - [X] many employees
   - [ ] no employees
   - [ ] empty file
   - [ ] file not found
