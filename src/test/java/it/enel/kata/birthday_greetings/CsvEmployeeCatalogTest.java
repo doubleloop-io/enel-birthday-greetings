@@ -72,4 +72,13 @@ public class CsvEmployeeCatalogTest {
 
         assertThat(employees).isEmpty();
     }
+
+    @Test
+    void fileNotFound() throws IOException {
+        CsvEmployeeCatalog csvEmployeeCatalog = new CsvEmployeeCatalog(new FileConfig(Path.of("DOESNT_EXIST.csv")));
+
+        Employee[] result = csvEmployeeCatalog.loadEmployees();
+
+        assertThat(result).isEmpty();
+    }
 }
