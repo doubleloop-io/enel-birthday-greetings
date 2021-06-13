@@ -31,10 +31,6 @@ public class BirthdayGreetings {
                 smtpMailSender.sendMail(mail);
             }
         }
-        for (String line : lines.stream().skip(1).toArray(String[]::new)) {
-            Employee employee = parseEmployeeLine(line);
-
-        }
     }
 
     private Employee parseEmployeeLine(String line) {
