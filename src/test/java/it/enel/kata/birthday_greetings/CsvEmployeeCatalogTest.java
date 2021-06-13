@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CsvEmployeeCatalogTest {
@@ -24,8 +25,7 @@ public class CsvEmployeeCatalogTest {
     @Test
     void oneEmployee() throws IOException {
         Files.write(fileConfig.getEmployeesFilePath(),
-                Arrays.asList(
-                        "last_name, first_name, date_of_birth, email",
+                asList("last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com"),
                 StandardCharsets.US_ASCII);
 
@@ -38,8 +38,7 @@ public class CsvEmployeeCatalogTest {
     @Test
     void manyEmployees() throws IOException {
         Files.write(fileConfig.getEmployeesFilePath(),
-                Arrays.asList(
-                        "last_name, first_name, date_of_birth, email",
+                asList("last_name, first_name, date_of_birth, email",
                         "Doe, John, 1982/10/08, john.doe@foobar.com",
                         "Di Domenico, Carlo, 1982/06/07, carlo.didomenico@foobar.com",
                         "Vallotti, Andrea, 1977/12/27, andrea.vallotti@foobar.com"),
@@ -56,8 +55,7 @@ public class CsvEmployeeCatalogTest {
     @Test
     void noEmployees() throws IOException {
         Files.write(fileConfig.getEmployeesFilePath(),
-                Arrays.asList(
-                        "last_name, first_name, date_of_birth, email"),
+                asList("last_name, first_name, date_of_birth, email"),
                 StandardCharsets.US_ASCII);
 
         Employee[] employees = csvEmployeeCatalog.loadEmployees();
