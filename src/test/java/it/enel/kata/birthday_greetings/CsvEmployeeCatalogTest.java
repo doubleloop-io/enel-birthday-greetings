@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 
 import static java.util.Arrays.asList;
@@ -57,6 +58,15 @@ public class CsvEmployeeCatalogTest {
         Files.write(fileConfig.getEmployeesFilePath(),
                 asList("last_name, first_name, date_of_birth, email"),
                 StandardCharsets.US_ASCII);
+
+        Employee[] employees = csvEmployeeCatalog.loadEmployees();
+
+        assertThat(employees).isEmpty();
+    }
+
+    @Test
+    void emptyFile() throws IOException {
+        Files.write(fileConfig.getEmployeesFilePath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
 
         Employee[] employees = csvEmployeeCatalog.loadEmployees();
 
