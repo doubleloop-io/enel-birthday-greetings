@@ -10,12 +10,10 @@ import java.util.List;
 
 public class BirthdayGreetings {
 
-    private final FileConfig fileConfig;
     private final CsvEmployeeCatalog csvEmployeeCatalog;
     private final SmtpMailSender smtpMailSender;
 
     public BirthdayGreetings(FileConfig fileConfig, SmtpConfig smtpConfig) {
-        this.fileConfig = fileConfig;
         csvEmployeeCatalog = new CsvEmployeeCatalog(fileConfig);
         smtpMailSender = new SmtpMailSender(smtpConfig);
     }
@@ -30,7 +28,7 @@ public class BirthdayGreetings {
     }
 
     private Employee[] loadEmployees() throws IOException {
-        List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
+        List<String> lines = Files.readAllLines(csvEmployeeCatalog.fileConfig.getEmployeesFilePath());
         ArrayList<Employee> employees = new ArrayList<>();
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
