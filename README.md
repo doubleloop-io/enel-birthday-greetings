@@ -27,15 +27,19 @@ http://matteo.vaccari.name/blog/archives/154
 - [X] Check birthday
 
 ## Test list
+- [ ] CsvEmployeeCatalog
+  - [ ] one employee
+  - [ ] many employees
+  - [ ] no employees
+  - [ ] empty file
+  - [ ] file not found
+  - [ ] Wrong file format
+    - [ ] wrong file extension
+    - [ ] invalid date format
+    - [ ] wrong number of columns
+    - [ ] invalid date, e.g. 2021/02/29
 - [ ] MailInfo
   - [ ] check mail format
-- [ ] Employee file is empty -> log error to console (message empty file) + no email
-- [ ] Wrong file format
-  - [ ] estensione
-  - [ ] formato mail non valido
-  - [ ] formato data non valido
-  - [ ] numero di colonne errato
-  - [ ] data non valida, e.g. 2021/02/29
 
 - [X] SmtpMailSender
   - [X] send one mail
