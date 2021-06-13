@@ -27,13 +27,14 @@ http://matteo.vaccari.name/blog/archives/154
 - [X] Check birthday
 
 ## Test list
+- [ ] remove `get` prefix from methods
 - [X] simplify BirthDate instantiation in tests
 - [ ] CsvEmployeeCatalog
   - [X] one employee
   - [X] many employees
   - [X] no employees
-  - [ ] empty file
-  - [ ] file not found
+  - [X] empty file
+  - [X] file not found
   - [ ] Wrong file format
     - [ ] wrong file extension
     - [ ] invalid date format
