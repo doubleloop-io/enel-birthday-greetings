@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CsvEmployeeCatalog {
-    public final FileConfig fileConfig;
+    private final FileConfig fileConfig;
 
     public CsvEmployeeCatalog(FileConfig fileConfig) {
         this.fileConfig = fileConfig;

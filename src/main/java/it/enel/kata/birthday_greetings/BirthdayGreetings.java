@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class BirthdayGreetings {
-
     private final CsvEmployeeCatalog csvEmployeeCatalog;
     private final SmtpMailSender smtpMailSender;
 
