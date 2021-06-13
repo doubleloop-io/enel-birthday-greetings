@@ -19,18 +19,23 @@ public class BirthdayGreetings {
     }
 
     public void send(LocalDate today) throws IOException {
-        List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
-        ArrayList<Employee> employees = new ArrayList<>();
-
-        for (String line : lines.stream().skip(1).toArray(String[]::new)) {
-            employees.add(parseEmployeeLine(line));
-        }
+        ArrayList<Employee> employees = loadEmployees();
         for (Employee employee : employees) {
             if(employee.isBirthday(today)) {
                 MailInfo mail = MailInfo.greetings(employee.getName(), employee.getEmail());
                 smtpMailSender.sendMail(mail);
             }
         }
+    }
+
+    private ArrayList<Employee> loadEmployees() throws IOException {
+        List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        for (String line : lines.stream().skip(1).toArray(String[]::new)) {
+            employees.add(parseEmployeeLine(line));
+        }
+        return employees;
     }
 
     private Employee parseEmployeeLine(String line) {
