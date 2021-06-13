@@ -36,6 +36,6 @@ public class CsvEmployeeCatalog {
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             employees.add(parseEmployeeLine(line));
         }
-        return employees.toArray(new Employee[0]);
+        return ret;
     }
 }
