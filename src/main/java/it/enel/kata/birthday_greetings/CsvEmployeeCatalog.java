@@ -31,6 +31,7 @@ public class CsvEmployeeCatalog {
     public Employee[] loadEmployees() throws IOException {
         List<String> lines = Files.readAllLines(fileConfig.getEmployeesFilePath());
         ArrayList<Employee> employees = new ArrayList<>();
+        Employee[] ret = lines.stream().skip(1).map(this::parseEmployeeLine).toArray(Employee[]::new);
 
         for (String line : lines.stream().skip(1).toArray(String[]::new)) {
             employees.add(parseEmployeeLine(line));
