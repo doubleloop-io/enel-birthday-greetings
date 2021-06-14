@@ -1,8 +1,8 @@
 package it.enel.kata.birthday_greetings.infrastructure;
 
 import it.enel.kata.birthday_greetings.domain.MailInfo;
+import it.enel.kata.birthday_greetings.domain.MailSender;
 import it.enel.kata.birthday_greetings.domain.NoDeliveryException;
-import it.enel.kata.birthday_greetings.infrastructure.SmtpConfig;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -12,14 +12,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class SmtpMailSender {
+public class SmtpMailSender implements MailSender {
     private final SmtpConfig smtpConfig;
 
     public SmtpMailSender(SmtpConfig smtpConfig) {
         this.smtpConfig = smtpConfig;
     }
 
-    public void sendMail(MailInfo mail) {
+    public void send(MailInfo mail) {
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtp.host", smtpConfig.host());
         properties.setProperty("mail.smtp.port", Integer.toString(smtpConfig.port()));

@@ -34,7 +34,7 @@ public class SmtpMailSenderTest {
     void oneMail() throws MessagingException {
         SmtpMailSender smtpMailSender = new SmtpMailSender(smtpConfig);
 
-        smtpMailSender.sendMail(MailInfo.greetings("Andrea", "andrea@foobar.com"));
+        smtpMailSender.send(MailInfo.greetings("Andrea", "andrea@foobar.com"));
 
         MailInfo expected = MailInfo.greetings("Andrea", "andrea@foobar.com");
         assertThat(localSmtpServer.receivedMessages()).contains(expected);
@@ -44,9 +44,9 @@ public class SmtpMailSenderTest {
     void manyMails() throws MessagingException {
         SmtpMailSender smtpMailSender = new SmtpMailSender(smtpConfig);
 
-        smtpMailSender.sendMail(MailInfo.greetings("Andrea", "andrea@foobar.com"));
-        smtpMailSender.sendMail(MailInfo.greetings("Mary", "mary@foobar.com"));
-        smtpMailSender.sendMail(MailInfo.greetings("John", "john@foobar.com"));
+        smtpMailSender.send(MailInfo.greetings("Andrea", "andrea@foobar.com"));
+        smtpMailSender.send(MailInfo.greetings("Mary", "mary@foobar.com"));
+        smtpMailSender.send(MailInfo.greetings("John", "john@foobar.com"));
 
         assertThat(localSmtpServer.receivedMessages()).contains(
                 MailInfo.greetings("Andrea", "andrea@foobar.com"),
@@ -58,7 +58,7 @@ public class SmtpMailSenderTest {
     void smtpDown() {
         SmtpMailSender smtpMailSender = new SmtpMailSender(new SmtpConfig("127.0.0.1", 666));
 
-        assertThatThrownBy(() -> smtpMailSender.sendMail(MailInfo.greetings("Andrea", "andrea@foobar.com")))
+        assertThatThrownBy(() -> smtpMailSender.send(MailInfo.greetings("Andrea", "andrea@foobar.com")))
             .isInstanceOf(NoDeliveryException.class)
             .hasMessageContaining("andrea@foobar.com");
     }
