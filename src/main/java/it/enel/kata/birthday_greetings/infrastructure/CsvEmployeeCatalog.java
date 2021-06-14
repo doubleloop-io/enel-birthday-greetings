@@ -1,6 +1,7 @@
 package it.enel.kata.birthday_greetings.infrastructure;
 
 import it.enel.kata.birthday_greetings.domain.Employee;
+import it.enel.kata.birthday_greetings.domain.EmployeeCatalog;
 import it.enel.kata.birthday_greetings.domain.LoadEmployeesException;
 import it.enel.kata.birthday_greetings.domain.BirthDate;
 
@@ -11,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-public class CsvEmployeeCatalog {
+public class CsvEmployeeCatalog implements EmployeeCatalog {
     private final FileConfig fileConfig;
 
     public CsvEmployeeCatalog(FileConfig fileConfig) {
@@ -35,11 +36,15 @@ public class CsvEmployeeCatalog {
         return new Employee(employeeParts[1], employeeParts[3], new BirthDate(parseDate(employeeParts[2])));
     }
 
-    public Employee[] loadEmployees() throws IOException {
+    public Employee[] loadAll() {
         if (!Files.exists(fileConfig.employeesFilePath())) return new Employee[0];
-        return Files.readAllLines(fileConfig.employeesFilePath()).stream()
-                .skip(1)
-                .map(this::parseEmployeeLine)
-                .toArray(Employee[]::new);
+        try {
+            return Files.readAllLines(fileConfig.employeesFilePath()).stream()
+                    .skip(1)
+                    .map(this::parseEmployeeLine)
+                    .toArray(Employee[]::new);
+        } catch (IOException e) {
+            throw new LoadEmployeesException("Error while reading file " + fileConfig.employeesFilePath(), e);
+        }
     }
 }

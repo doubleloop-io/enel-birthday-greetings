@@ -35,7 +35,7 @@ public class CsvEmployeeCatalogTest {
                         "Doe, John, 1982/10/08, john.doe@foobar.com"),
                 StandardCharsets.US_ASCII);
 
-        Employee[] employees = csvEmployeeCatalog.loadEmployees();
+        Employee[] employees = csvEmployeeCatalog.loadAll();
 
         assertThat(employees).contains(
                 new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8)));
@@ -50,7 +50,7 @@ public class CsvEmployeeCatalogTest {
                         "Vallotti, Andrea, 1977/12/27, andrea.vallotti@foobar.com"),
                 StandardCharsets.US_ASCII);
 
-        Employee[] employees = csvEmployeeCatalog.loadEmployees();
+        Employee[] employees = csvEmployeeCatalog.loadAll();
 
         assertThat(employees).contains(
                 new Employee("Andrea", "andrea.vallotti@foobar.com", BirthDate.of(1977, 12, 27)),
@@ -64,7 +64,7 @@ public class CsvEmployeeCatalogTest {
                 asList("last_name, first_name, date_of_birth, email"),
                 StandardCharsets.US_ASCII);
 
-        Employee[] employees = csvEmployeeCatalog.loadEmployees();
+        Employee[] employees = csvEmployeeCatalog.loadAll();
 
         assertThat(employees).isEmpty();
     }
@@ -73,7 +73,7 @@ public class CsvEmployeeCatalogTest {
     void emptyFile() throws IOException {
         Files.write(fileConfig.employeesFilePath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
 
-        Employee[] employees = csvEmployeeCatalog.loadEmployees();
+        Employee[] employees = csvEmployeeCatalog.loadAll();
 
         assertThat(employees).isEmpty();
     }
@@ -82,7 +82,7 @@ public class CsvEmployeeCatalogTest {
     void fileNotFound() throws IOException {
         CsvEmployeeCatalog csvEmployeeCatalog = new CsvEmployeeCatalog(new FileConfig(Path.of("DOESNT_EXIST.csv")));
 
-        Employee[] result = csvEmployeeCatalog.loadEmployees();
+        Employee[] result = csvEmployeeCatalog.loadAll();
 
         assertThat(result).isEmpty();
     }
@@ -97,7 +97,7 @@ public class CsvEmployeeCatalogTest {
                         "Vallotti, Andrea, 1977/12/27, andrea.vallotti@foobar.com"),
                 StandardCharsets.US_ASCII);
 
-        assertThatThrownBy(() -> csvEmployeeCatalog.loadEmployees())
+        assertThatThrownBy(() -> csvEmployeeCatalog.loadAll())
                 .isInstanceOf(LoadEmployeesException.class)
                 .hasMessageContaining("date format")
                 .hasMessageContaining("07/06/1982");
