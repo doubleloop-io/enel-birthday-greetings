@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Acceptance test - BirthdayGreetings")
 public class BirthdayGreetingsTest {
@@ -59,9 +60,8 @@ public class BirthdayGreetingsTest {
     void noEmployees() {
         EmployeeCatalog employeeCatalog = new InMemoryEmployeeCatalog();
         MailSenderSpy mailSender = new MailSenderSpy();
+        BirthdayGreetings birthdayGreetings = new BirthdayGreetings(employeeCatalog, mailSender);
 
-        new BirthdayGreetings(employeeCatalog, mailSender).send(LocalDate.of(2021, 9, 12));
-
-        assertThat(mailSender.receivedMails()).isEmpty();
+        assertThatThrownBy(() -> birthdayGreetings.send(LocalDate.of(2021, 9, 12)));
     }
 }
