@@ -2,6 +2,7 @@ package it.enel.kata.birthday_greetings.domain;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class BirthDate {
@@ -13,6 +14,10 @@ public class BirthDate {
 
     public boolean isBirthday(LocalDate today) {
         return isTypicalBirthday(today) || isBirthdayOn29thFeb(today);
+    }
+
+    public String format(String format) {
+        return date.format(DateTimeFormatter.ofPattern(format));
     }
 
     private boolean isTypicalBirthday(LocalDate today) {

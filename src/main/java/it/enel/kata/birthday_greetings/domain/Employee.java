@@ -22,6 +22,10 @@ public class Employee {
         return email;
     }
 
+    public BirthDate birthDate() {
+        return birthDate;
+    }
+
     public boolean isBirthday(LocalDate today) {
         return birthDate.isBirthday(today);
     }
