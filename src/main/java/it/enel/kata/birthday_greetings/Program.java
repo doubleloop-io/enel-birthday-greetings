@@ -1,5 +1,11 @@
 package it.enel.kata.birthday_greetings;
 
+import it.enel.kata.birthday_greetings.infrastructure.BirthdayGreetings;
+import it.enel.kata.birthday_greetings.infrastructure.CsvEmployeeCatalog;
+import it.enel.kata.birthday_greetings.infrastructure.FileConfig;
+import it.enel.kata.birthday_greetings.infrastructure.SmtpConfig;
+import it.enel.kata.birthday_greetings.infrastructure.SmtpMailSender;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package it.enel.kata.birthday_greetings;
+package it.enel.kata.birthday_greetings.infrastructure;
 
 import java.nio.file.Path;
 

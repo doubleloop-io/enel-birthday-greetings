@@ -1,5 +1,9 @@
 package it.enel.kata.birthday_greetings;
 
+import it.enel.kata.birthday_greetings.domain.MailInfo;
+import it.enel.kata.birthday_greetings.domain.NoDeliveryException;
+import it.enel.kata.birthday_greetings.infrastructure.SmtpConfig;
+import it.enel.kata.birthday_greetings.infrastructure.SmtpMailSender;
 import it.enel.kata.birthday_greetings.support.LocalSmtpServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

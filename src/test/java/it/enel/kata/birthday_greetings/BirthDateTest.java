@@ -1,5 +1,6 @@
 package it.enel.kata.birthday_greetings;
 
+import it.enel.kata.birthday_greetings.domain.BirthDate;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

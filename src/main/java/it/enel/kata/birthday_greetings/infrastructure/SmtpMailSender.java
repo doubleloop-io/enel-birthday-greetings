@@ -1,4 +1,8 @@
-package it.enel.kata.birthday_greetings;
+package it.enel.kata.birthday_greetings.infrastructure;
+
+import it.enel.kata.birthday_greetings.domain.MailInfo;
+import it.enel.kata.birthday_greetings.domain.NoDeliveryException;
+import it.enel.kata.birthday_greetings.infrastructure.SmtpConfig;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,7 +19,7 @@ public class SmtpMailSender {
         this.smtpConfig = smtpConfig;
     }
 
-    void sendMail(MailInfo mail) {
+    public void sendMail(MailInfo mail) {
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtp.host", smtpConfig.host());
         properties.setProperty("mail.smtp.port", Integer.toString(smtpConfig.port()));

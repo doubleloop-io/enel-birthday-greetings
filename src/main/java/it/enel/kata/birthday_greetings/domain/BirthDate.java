@@ -1,4 +1,4 @@
-package it.enel.kata.birthday_greetings;
+package it.enel.kata.birthday_greetings.domain;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -11,7 +11,7 @@ public class BirthDate {
         this.date = date;
     }
 
-    boolean isBirthday(LocalDate today) {
+    public boolean isBirthday(LocalDate today) {
         return isTypicalBirthday(today) || isBirthdayOn29thFeb(today);
     }
 

@@ -1,4 +1,4 @@
-package it.enel.kata.birthday_greetings;
+package it.enel.kata.birthday_greetings.infrastructure;
 
 public class SmtpConfig {
     private final String host;

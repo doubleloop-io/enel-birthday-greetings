@@ -1,5 +1,10 @@
 package it.enel.kata.birthday_greetings;
 
+import it.enel.kata.birthday_greetings.domain.BirthDate;
+import it.enel.kata.birthday_greetings.domain.Employee;
+import it.enel.kata.birthday_greetings.domain.LoadEmployeesException;
+import it.enel.kata.birthday_greetings.infrastructure.CsvEmployeeCatalog;
+import it.enel.kata.birthday_greetings.infrastructure.FileConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
