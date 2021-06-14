@@ -1,6 +1,6 @@
 package it.enel.kata.birthday_greetings.integration;
 
-import it.enel.kata.birthday_greetings.domain.BirthDate;
+import it.enel.kata.birthday_greetings.contract.EmployeeCatalogContractTest;
 import it.enel.kata.birthday_greetings.domain.Employee;
 import it.enel.kata.birthday_greetings.domain.EmployeeCatalog;
 import it.enel.kata.birthday_greetings.domain.LoadEmployeesException;
@@ -20,10 +20,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CsvEmployeeCatalogTest {
+public class CsvEmployeeCatalogTest extends EmployeeCatalogContractTest {
     private FileConfig fileConfig;
     private CsvEmployeeCatalog csvEmployeeCatalog;
 
@@ -31,65 +30,6 @@ public class CsvEmployeeCatalogTest {
     void setUp() {
         fileConfig = new FileConfig(Path.of("employees_test.csv"));
         csvEmployeeCatalog = new CsvEmployeeCatalog(fileConfig);
-    }
-
-    @Test
-    void oneEmployee() {
-        EmployeeCatalog employeeCatalog = employeeCatalogWith(
-                new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8))
-        );
-
-        Employee[] employees = employeeCatalog.loadAll();
-
-        assertThat(employees).contains(
-                new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8)));
-    }
-
-    private EmployeeCatalog employeeCatalogWith(Employee... employees) {
-        try {
-            List<String> lines = Stream.concat(
-                    Stream.of("last_name, first_name, date_of_birth, email"),
-                    Arrays.stream(employees).map(this::employeeLine)
-            ).collect(Collectors.toList());
-            Files.write(fileConfig.employeesFilePath(), lines, StandardCharsets.US_ASCII);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new CsvEmployeeCatalog(fileConfig);
-    }
-
-    private String employeeLine(Employee employee) {
-        String[] parts = new String[] {
-                "USELESS",
-                employee.name(),
-                employee.birthDate().format("yyyy/MM/dd"),
-                employee.email()
-        };
-        return String.join(", ", parts);
-    }
-
-    @Test
-    void manyEmployees() {
-        EmployeeCatalog employeeCatalog = employeeCatalogWith(
-                new Employee("Andrea", "andrea.vallotti@foobar.com", BirthDate.of(1977, 12, 27)),
-                new Employee("Carlo", "carlo.didomenico@foobar.com", BirthDate.of(1982, 6, 7)),
-                new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8))
-        );
-
-        Employee[] employees = employeeCatalog.loadAll();
-
-        assertThat(employees).contains(
-                new Employee("Andrea", "andrea.vallotti@foobar.com", BirthDate.of(1977, 12, 27)),
-                new Employee("Carlo", "carlo.didomenico@foobar.com", BirthDate.of(1982, 6, 7)),
-                new Employee("John", "john.doe@foobar.com", BirthDate.of(1982, 10, 8)));
-    }
-
-    @Test
-    void noEmployees() {
-        EmployeeCatalog employeeCatalog = employeeCatalogWith();
-
-        assertThatThrownBy(() -> employeeCatalog.loadAll())
-                .isInstanceOf(LoadEmployeesException.class);
     }
 
     @Test
@@ -122,5 +62,28 @@ public class CsvEmployeeCatalogTest {
                 .isInstanceOf(LoadEmployeesException.class)
                 .hasMessageContaining("date format")
                 .hasMessageContaining("07/06/1982");
+    }
+
+    protected EmployeeCatalog employeeCatalogWith(Employee... employees) {
+        try {
+            List<String> lines = Stream.concat(
+                    Stream.of("last_name, first_name, date_of_birth, email"),
+                    Arrays.stream(employees).map(this::employeeLine)
+            ).collect(Collectors.toList());
+            Files.write(fileConfig.employeesFilePath(), lines, StandardCharsets.US_ASCII);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new CsvEmployeeCatalog(fileConfig);
+    }
+
+    private String employeeLine(Employee employee) {
+        String[] parts = new String[] {
+                "USELESS",
+                employee.name(),
+                employee.birthDate().format("yyyy/MM/dd"),
+                employee.email()
+        };
+        return String.join(", ", parts);
     }
 }
