@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 public class Program {
     public static void main(String[] args) throws IOException {
-        CsvEmployeeCatalog csvEmployeeCatalog = new CsvEmployeeCatalog(new FileConfig(Path.of("employees.csv")));
+        CsvEmployeeCatalog csvEmployeeCatalog = new CsvEmployeeCatalog(new FileConfig(Path.of("empty_employees.csv")));
         SmtpMailSender smtpMailSender = new SmtpMailSender(new SmtpConfig("127.0.0.1", 1025));
         BirthdayGreetings birthdayGreetings = new BirthdayGreetings(csvEmployeeCatalog, smtpMailSender);
 

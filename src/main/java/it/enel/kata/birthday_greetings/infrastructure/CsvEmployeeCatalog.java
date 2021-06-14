@@ -37,14 +37,18 @@ public class CsvEmployeeCatalog implements EmployeeCatalog {
     }
 
     public Employee[] loadAll() {
-        if (!Files.exists(fileConfig.employeesFilePath())) return new Employee[0];
+        if (!Files.exists(fileConfig.employeesFilePath()))
+            throw new LoadEmployeesException("Missing file " + fileConfig.employeesFilePath());
+        Employee[] employees;
         try {
-            return Files.readAllLines(fileConfig.employeesFilePath()).stream()
+            employees = Files.readAllLines(fileConfig.employeesFilePath()).stream()
                     .skip(1)
                     .map(this::parseEmployeeLine)
                     .toArray(Employee[]::new);
         } catch (IOException e) {
             throw new LoadEmployeesException("Error while reading file " + fileConfig.employeesFilePath(), e);
         }
+        if (employees.length == 0) throw new LoadEmployeesException("No employees in file " + fileConfig.employeesFilePath());
+        return employees;
     }
 }

@@ -64,27 +64,24 @@ public class CsvEmployeeCatalogTest {
                 asList("last_name, first_name, date_of_birth, email"),
                 StandardCharsets.US_ASCII);
 
-        Employee[] employees = csvEmployeeCatalog.loadAll();
-
-        assertThat(employees).isEmpty();
+        assertThatThrownBy(() -> csvEmployeeCatalog.loadAll())
+                .isInstanceOf(LoadEmployeesException.class);
     }
 
     @Test
     void emptyFile() throws IOException {
         Files.write(fileConfig.employeesFilePath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
 
-        Employee[] employees = csvEmployeeCatalog.loadAll();
-
-        assertThat(employees).isEmpty();
+        assertThatThrownBy(() -> csvEmployeeCatalog.loadAll())
+                .isInstanceOf(LoadEmployeesException.class);
     }
 
     @Test
-    void fileNotFound() throws IOException {
+    void fileNotFound() {
         CsvEmployeeCatalog csvEmployeeCatalog = new CsvEmployeeCatalog(new FileConfig(Path.of("DOESNT_EXIST.csv")));
 
-        Employee[] result = csvEmployeeCatalog.loadAll();
-
-        assertThat(result).isEmpty();
+        assertThatThrownBy(() -> csvEmployeeCatalog.loadAll())
+                .isInstanceOf(LoadEmployeesException.class);
     }
 
     @Test
