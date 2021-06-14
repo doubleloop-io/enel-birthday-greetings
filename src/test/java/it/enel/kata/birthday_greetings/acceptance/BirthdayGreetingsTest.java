@@ -1,4 +1,4 @@
-package it.enel.kata.birthday_greetings.e2e;
+package it.enel.kata.birthday_greetings.acceptance;
 
 import it.enel.kata.birthday_greetings.domain.BirthdayGreetings;
 import it.enel.kata.birthday_greetings.domain.MailInfo;
@@ -6,11 +6,11 @@ import it.enel.kata.birthday_greetings.infrastructure.CsvEmployeeCatalog;
 import it.enel.kata.birthday_greetings.infrastructure.FileConfig;
 import it.enel.kata.birthday_greetings.infrastructure.SmtpConfig;
 import it.enel.kata.birthday_greetings.infrastructure.SmtpMailSender;
+import it.enel.kata.birthday_greetings.support.LocalSmtpServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import it.enel.kata.birthday_greetings.support.LocalSmtpServer;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("E2E - BirthdayGreetings")
+@DisplayName("Acceptance test - BirthdayGreetings")
 public class BirthdayGreetingsTest {
     private LocalSmtpServer localSmtpServer;
     private FileConfig fileConfig;
