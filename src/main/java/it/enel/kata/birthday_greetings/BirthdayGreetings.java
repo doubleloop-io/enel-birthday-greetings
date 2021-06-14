@@ -8,8 +8,12 @@ public class BirthdayGreetings {
     private final SmtpMailSender smtpMailSender;
 
     public BirthdayGreetings(FileConfig fileConfig, SmtpConfig smtpConfig) {
-        csvEmployeeCatalog = new CsvEmployeeCatalog(fileConfig);
-        smtpMailSender = new SmtpMailSender(smtpConfig);
+        this(new CsvEmployeeCatalog(fileConfig), new SmtpMailSender(smtpConfig));
+    }
+
+    public BirthdayGreetings(CsvEmployeeCatalog csvEmployeeCatalog, SmtpMailSender smtpMailSender) {
+        this.csvEmployeeCatalog = csvEmployeeCatalog;
+        this.smtpMailSender = smtpMailSender;
     }
 
     public void send(LocalDate today) throws IOException {
