@@ -1,6 +1,6 @@
 package it.enel.kata.birthday_greetings;
 
-import it.enel.kata.birthday_greetings.infrastructure.BirthdayGreetings;
+import it.enel.kata.birthday_greetings.domain.BirthdayGreetings;
 import it.enel.kata.birthday_greetings.infrastructure.CsvEmployeeCatalog;
 import it.enel.kata.birthday_greetings.infrastructure.FileConfig;
 import it.enel.kata.birthday_greetings.infrastructure.SmtpConfig;

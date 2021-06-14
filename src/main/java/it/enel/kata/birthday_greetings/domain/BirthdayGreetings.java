@@ -1,9 +1,4 @@
-package it.enel.kata.birthday_greetings.infrastructure;
-
-import it.enel.kata.birthday_greetings.domain.Employee;
-import it.enel.kata.birthday_greetings.domain.EmployeeCatalog;
-import it.enel.kata.birthday_greetings.domain.MailInfo;
-import it.enel.kata.birthday_greetings.domain.MailSender;
+package it.enel.kata.birthday_greetings.domain;
 
 import java.time.LocalDate;
 
