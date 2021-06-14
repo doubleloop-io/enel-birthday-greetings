@@ -55,4 +55,13 @@ public class BirthdayGreetingsTest {
         );
     }
 
+    @Test
+    void noEmployees() {
+        EmployeeCatalog employeeCatalog = new InMemoryEmployeeCatalog();
+        MailSenderSpy mailSender = new MailSenderSpy();
+
+        new BirthdayGreetings(employeeCatalog, mailSender).send(LocalDate.of(2021, 9, 12));
+
+        assertThat(mailSender.receivedMails()).isEmpty();
+    }
 }
