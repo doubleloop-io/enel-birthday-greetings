@@ -60,42 +60,4 @@ public class BirthdayGreetingsTest {
         MailInfo expected = MailInfo.greetings("John", "john.doe@foobar.com");
         assertEquals(expected, receivedMessage);
     }
-
-    @Test
-    void noGreetings() throws IOException, MessagingException {
-        Files.write(fileConfig.employeesFilePath(),
-                Arrays.asList(
-                        "last_name, first_name, date_of_birth, email",
-                        "Doe, John, 1982/10/08, john.doe@foobar.com",
-                        "Ann, Mary, 1975/09/11, mary.ann@foobar.com",
-                        "Vallotti, Andrea, 1977/09/11, andrea.vallotti@foobar.com"
-                ),
-                StandardCharsets.US_ASCII);
-
-        new BirthdayGreetings(csvEmployeeCatalog, smtpMailSender).send(LocalDate.of(2021, 9, 12));
-
-        assertThat(localSmtpServer.receivedMessages()).isEmpty();
-    }
-
-    @Test
-    void manyGreetings() throws IOException, MessagingException {
-        Files.write(fileConfig.employeesFilePath(),
-                Arrays.asList(
-                        "last_name, first_name, date_of_birth, email",
-                        "Doe, John, 1982/10/08, john.doe@foobar.com",
-                        "Ann, Mary, 1975/09/11, mary.ann@foobar.com",
-                        "Vallotti, Andrea, 1977/09/11, andrea.vallotti@foobar.com"
-                ),
-                StandardCharsets.US_ASCII);
-
-        new BirthdayGreetings(csvEmployeeCatalog, smtpMailSender).send(LocalDate.of(2021, 9, 11));
-
-        assertThat(localSmtpServer.receivedMessages()).hasSize(2);
-        assertEquals(
-                MailInfo.greetings("Mary", "mary.ann@foobar.com"),
-                localSmtpServer.receivedMessages()[0]);
-        assertEquals(
-                MailInfo.greetings("Andrea", "andrea.vallotti@foobar.com"),
-                localSmtpServer.receivedMessages()[1]);
-    }
 }
