@@ -1,4 +1,4 @@
-package it.enel.kata.birthday_greetings;
+package it.enel.kata.birthday_greetings.unit;
 
 import it.enel.kata.birthday_greetings.domain.BirthDate;
 import org.junit.jupiter.api.Test;

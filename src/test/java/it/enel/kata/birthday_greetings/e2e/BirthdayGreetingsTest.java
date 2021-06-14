@@ -1,4 +1,4 @@
-package it.enel.kata.birthday_greetings;
+package it.enel.kata.birthday_greetings.e2e;
 
 import it.enel.kata.birthday_greetings.domain.BirthdayGreetings;
 import it.enel.kata.birthday_greetings.domain.MailInfo;
